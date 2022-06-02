@@ -5,7 +5,7 @@
 */
 
 
-let me = {
+const me = {
   name: 'Clara Dehlin',
   age: 21
 }
@@ -18,13 +18,12 @@ let me = {
 //name (a string), color (a string), age (a number),
 //and goodBoy/goodGirl (a boolean).
 
-let goodGirl = true;
 
-let dog = {
+const dog = {
   name: 'Pumpkin',
   color: ['orange','black'],
   age: 6,
-  goodGirl
+  goodGirl: true
 }
 
 
@@ -87,7 +86,7 @@ var carDetails = {
   Use object destructuring to save the property values from the object carDetails into new variables. 
 */
 
-const {color, make, model, year} = carDetails
+let {color, make, model, year} = carDetails
 
 
 //////////////////////////// PROBLEM 7 ////////////////////////////
@@ -100,13 +99,30 @@ const {color, make, model, year} = carDetails
 
 function greeting( obj ) {
 
-  const {firstName, lastName, title} = greeting
+  let {firstName, lastName, title} = obj
 
   // Do not edit the code below.
   return 'Hello, ' + title + ' ' + firstName + ' ' + lastName + '!';
   // Do not edit the code above.
 }
 
+myObject1 = {
+  firstName: 'clara',
+  lastName: 'dehlin',
+  title: 'dino girl'
+
+}
+
+myObject2 = {
+  firstName: 'margi',
+  lastName: 'dehlin',
+  title: 'ur mom'
+}
+
+let greetingResult1 = greeting(myObject1)
+// console.log(greetingResult1)
+let greetingResult2 = greeting(myObject2)
+// console.log(greetingResult2)
 
 //////////////////////////// PROBLEM 8 ////////////////////////////
 
@@ -144,10 +160,14 @@ let population = {
 */
 
 function ingredients (obj) {
-  const {carb, fat, protein} = obj
-  let array = [obj]
-  array.push()
-  return array
+  let {carb, fat, protein} = obj
+  
+  let arr = []
+  arr.push(carb)
+  arr.push(fat)
+  arr.push(protein)
+
+  return arr
 }
 
 let details = {
@@ -223,7 +243,7 @@ let myCat = new Cat('Rumi', 2, 'black and grey')
 */
 
 class Wizard {
-  constructor(name, age, favoriteSpell){
+  constructor(name, age, favoriteSpell) {
     this.name = name
     this.age = age
     this.favoriteSpell = favoriteSpell
@@ -234,8 +254,7 @@ class Wizard {
 }
 let Dumbledore = new Wizard('Dumbledore', 89, 'Lumos')
 
-console.log(Dumbledore)
-console.log(Dumbledore.castSpell())
+// Dumbledore.castSpell()
 
 //////////////////////////// PROBLEM 14 ////////////////////////////
 /*
@@ -260,8 +279,26 @@ console.log(Dumbledore.castSpell())
     to be newPrice.
 */
 
-//Code Here
+class Phone {
+  constructor(brand, model, storage, color, price) {
+    this.brand = brand
+    this.model = model
+    this.storage = storage
+    this.color = color
+    this.price = price
+    this.sold = false
+  }
 
+
+sell() {
+  this.sold = true
+  console.log(`${this.brand} ${this.model} has been sold.`)
+}
+
+changePrice(newPrice) {
+  this.price = newPrice
+  }
+}
   
 /*
     Next make three new phone instances using your class.
@@ -273,7 +310,9 @@ console.log(Dumbledore.castSpell())
     - price: number
 */
 
-//Code Here
+let phone1 = new Phone ('Samsung', '5S', 64, 'blue', 200)
+let phone2 = new Phone ('Samsung', '6M', 128, 'blue', 300)
+let phone3 = new Phone ('iPhone', 'SE', 128, 'black', 250)
 
 /* 
   Call the changePrice function on one of your phones, 
@@ -282,8 +321,9 @@ console.log(Dumbledore.castSpell())
   Then console.log that object to see the price change
 */ 
 
-//Code Here 
+phone1.changePrice(150)
 
+// console.log(phone1)
 
 /*
   Now call the sell method on one of your other phone objects
@@ -291,8 +331,8 @@ console.log(Dumbledore.castSpell())
   Print the value of that phone's sell property to make sure it's been changed to true
 */
 
-//Code Here 
-
+//phone2.sell()
+//console.log(phone2.sold)
 
 //////////////////////////// PROBLEM 15 ////////////////////////////
 
@@ -303,14 +343,15 @@ console.log(Dumbledore.castSpell())
 */
 
 //do not edit this object
-// const colors = {
-//   background: 'red',
-//   highlight: 'blue',
-//   text: 'yellow'
-// }
+const colors = {
+  background: 'red',
+  highlight: 'blue',
+  text: 'yellow'
+}
 //do not edit this object
 
-//Code Here 
+const colorsCopy = {...colors}
+// console.log(colorsCopy)
 
 
 
@@ -321,24 +362,25 @@ console.log(Dumbledore.castSpell())
 */
 
 //do not edit the objects below
-// const contactInfo = {
-//   firstName: 'Helen',
-//   lastName: 'Parr',
-//   phoneNumber: 1234445555,
-//   email: 'helen@mymail.com',
-// }
+const contactInfo = {
+  firstName: 'Helen',
+  lastName: 'Parr',
+  phoneNumber: 1234445555,
+  email: 'helen@mymail.com',
+}
 
-// const shippingInfo = {
-//   firstName: 'Helen',
-//   lastName: 'Parr',
-//   street: '100 E. Main Street',
-//   city: 'Anytown',
-//   state: 'AZ',
-//   zipCode: 85004,
-// }
+const shippingInfo = {
+  firstName: 'Helen',
+  lastName: 'Parr',
+  street: '100 E. Main Street',
+  city: 'Anytown',
+  state: 'AZ',
+  zipCode: 85004,
+}
 //do not edit the objects above
 
-//Code Here
+const helensInfo = {...contactInfo, ...shippingInfo}
+// console.log(helensInfo)
 
 
 //Print helensInfo to see what it looks like, there should be no repeating properties.
@@ -356,14 +398,24 @@ console.log(Dumbledore.castSpell())
   And finally, print the value of the mileage.
 */
 
-//Code Here 
+class Vehicle {
+  constructor(capacity, color, mileage) {
+    this.capacity = capacity
+    this.color = color
+    this.mileage = mileage
+  }
 
+  move(miles) {
+    this.mileage+=miles
+    console.log(this.mileage)
+  }
+}
 
 /*
   Create a vehicle using your new class and save it to a variable called myFirstVehicle
 */
 
-//Code Here
+myFirstVehicle = new Vehicle(5, 'red', 30000)
 
 
 /* 
@@ -374,18 +426,25 @@ console.log(Dumbledore.castSpell())
   new ones: make and isCool. (Hint: don't forget to call the super function)
 */
 
-//Code Here
+class Motorcycle extends Vehicle {
+  constructor(capacity, color, mileage, make, isCool) {
+    super(capacity, color, mileage)
+    this.make = make
+    this.isCool = isCool
+  }
+}
 
 /*
   Create a Motorcycle using your new class and save it to a variable called myFirstMotorcycle
 */
 
-//Code Here 
+let myFirstMotorcycle = new Motorcycle(2, 'black', 20000, 'Yamaha 2000', true)
 
 /*
   Call the move function on myFirstMotorcycle (don't forget the parameter)
 */
-
+//myFirstMotorcycle.move(500)
+//console.log(myFirstMotorcycle)
 /*
   Let's make another class based off of Vehicle. 
 
@@ -402,30 +461,48 @@ console.log(Dumbledore.castSpell())
   This function should set isSeaworthy to be true
 */
 
-//Code Here
+class Boat extends Vehicle {
+  constructor(capacity, color, mileage, name, type, isSeaWorthy) {
+    super(capacity,color,mileage)
+  this.name = name
+  this.type = type
+  this.isSeaWorthy = isSeaWorthy
+}
 
+checkSeaworthiness() {
+  if (this.isSeaWorthy) {
+    console.log(`The ${this.color} ${this.type} ${this.name} is seaworthy!`)
+  } else {
+    console.log(`You need to get your ${this.type} in shape!`)
+  }
+}
+
+performMaintenence () {
+  this.isSeaWorthy = true
+  }
+}
 
 /*
   Create a new boat using your class. You can choose whatever values you like for all the 
   properties except isSeaworthy -- make that one false. Call your variable myFirstBoat.
 */
 
-//Code Here
+let myFirstBoat = new Boat(10, 'red', 10000, 'her majesty queen of the lake', 'cool boat', false)
 
 /*
   Call the checkSeaworthiness method on your new boat
 */
 
-//Code Here
+//myFirstBoat.checkSeaworthiness()
 
 /*
   Now run the performMaintenance method on your boat
 */
 
-//Code Here 
+//myFirstBoat.performMaintenance()
 
 /*
   Check the seaworthiness once more (you should be ready for the water!)
 */
 
-//Code Here
+//myFirstBoat.checkSeaworthiness()
